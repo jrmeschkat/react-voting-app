@@ -11,6 +11,7 @@ class EditVote extends Component {
     const { vote } = this.props;
     const { onDeleteVote } = this.props;
     const { onAddCandidate } = this.props;
+    const { onDeleteCandidate } = this.props;
     return (
       <div className="card">
         <div className="card-header">
@@ -33,18 +34,26 @@ class EditVote extends Component {
         <div className="card-body">
           <h4>Candidates:</h4>
           <ul className="list-group">
-            {vote.candidates.map(c => (
-              <li className="list-group-item">
-                <EditCandidate candidate={c} />
-              </li>
-            ))}
+            {vote.candidates.map(c => {
+              return (
+                <li className="list-group-item" key={c.id}>
+                  <EditCandidate
+                    candidate={c}
+                    onDeleteCandidate={candidate =>
+                      onDeleteCandidate(vote, candidate)
+                    }
+                  />
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div className="card-footer">
           <div className="input-group">
             <input
               type="text"
-              onInput={event =>
+              value={this.state.inputCandidate}
+              onChange={event =>
                 this.setState({ inputCandidate: event.target.value })
               }
               className="form-control"
@@ -53,8 +62,11 @@ class EditVote extends Component {
             <div className="input-group-append">
               <button
                 onClick={() => {
-                  onAddCandidate(vote, this.state.inputCandidate);
-                  this.setState({ inputCandidate: '' });
+                  const candidate = this.state.inputCandidate;
+                  if (!!candidate) {
+                    onAddCandidate(vote, candidate);
+                    this.setState({ inputCandidate: '' });
+                  }
                 }}
                 className="btn btn-success"
               >

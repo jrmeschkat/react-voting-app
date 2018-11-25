@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import NavBar from './components/navbar';
+import VotingNavBar from './components/navbar';
 import Home from './views/home';
 import Result from './views/result';
 import Create from './views/create';
@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <NavBar />
+          <VotingNavBar />
           <Switch>
             <Route path="/" component={Home} exact />
             <Route path="/result" component={Result} />

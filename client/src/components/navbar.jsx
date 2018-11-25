@@ -1,15 +1,15 @@
 import React from 'react';
+import Navbar from 'react-bootstrap/lib/Navbar';
+import Nav from 'react-bootstrap/lib/Nav';
 import { NavLink } from 'react-router-dom';
 
-const NavBar = props => {
+const VotingNavBar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <NavLink className="navbar-brand" to="/">
-        Vote
-      </NavLink>
-
-      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div className="navbar-nav">
+    <Navbar bg="light">
+      <Navbar.Brand href="/">Vote</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
           <NavLink
             className="nav-item nav-link"
             activeClassName="active"
@@ -34,10 +34,10 @@ const NavBar = props => {
           >
             Result
           </NavLink>
-        </div>
-      </div>
-    </nav>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 
-export default NavBar;
+export default VotingNavBar;
